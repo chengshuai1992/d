@@ -16,7 +16,7 @@ IMAGE_SIZE = 227
 model_file = "../Data/weight/finetune_weights"
 checkpoint_file = "../Data/checkpiont/"
 model = {}
-
+shuffle=True
 
 def hash_loss(image, label, alpha, m):
     _, D, net_model = train_model.alexnet_layer(image)
@@ -58,7 +58,7 @@ def train():
 
     with tf.Session() as sess:
 
-        images, labels = read_record.reader_TFrecord(EPOCH)
+        images, labels = read_record.reader_TFrecord(EPOCH,shuffle)
         image_batch, label_batch = read_record.next_batch(images, labels)
         init = (tf.global_variables_initializer(), tf.local_variables_initializer())
         coord = tf.train.Coordinator()

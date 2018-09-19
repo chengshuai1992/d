@@ -20,11 +20,11 @@ config = {
 match_files="../Data/cifar-10-record/train-*"
 
 
-def reader_TFrecord(epoch):
+def reader_TFrecord(epoch,shuffle):
 
     files = tf.train.match_filenames_once(match_files)
 
-    filename_queue = tf.train.string_input_producer(files, shuffle=True,num_epochs=epoch)
+    filename_queue = tf.train.string_input_producer(files, shuffle=shuffle,num_epochs=epoch)
     reader = tf.TFRecordReader()
     _, serialized_example = reader.read(filename_queue)
     feature = tf.parse_single_example(
